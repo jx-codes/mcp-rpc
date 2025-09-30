@@ -4,6 +4,7 @@
 
 https://github.com/jx-codes/mcp-rpc-runtime
 https://github.com/jx-codes/mcp-rpc-bridge
+https://jmcodes.tech/blog/mcp-rpc/
 
 ## Background
 
