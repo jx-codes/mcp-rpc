@@ -185,16 +185,21 @@ Instead of 10 sequential tool calls, Claude writes a single TypeScript script wi
 ## Architecture
 
 ```
-┌─────────────┐         ┌──────────────┐         ┌─────────────┐
-│   Claude    │ ◄─────► │  MCP Bridge  │ ◄─────► │ RPC Runtime │
-│   (Client)  │   MCP   │  (Protocol)  │   WS    │   (Deno)    │
-└─────────────┘         └──────────────┘         └─────────────┘
-                                                         │
-                                                         ▼
-                                                  ┌─────────────┐
-                                                  │ TypeScript  │
-                                                  │  Functions  │
-                                                  └─────────────┘
+┌─────────────┐         ┌──────────────┐         ┌───────────────────┐
+│   Claude    │ ◄─────► │  MCP Bridge  │ ◄─────► │ MCP-RPC-Runtime   │
+│   (Client)  │   MCP   │  (Protocol)  │   WS    │     (Deno)        │
+└─────────────┘         └──────────────┘         └─────────┬─────────┘
+                                                         spawns
+                                                           |
+                                                  ┌─────────────────────┐
+                                                  │    LLM Sandbox      │
+                                                  │  (Net Permissions)  │
+                                                  └─────────────────────┘
+                                                           (and)
+                                                  ┌─────────────────────┐
+                                                  │   RPC Functions     │
+                                                  │  (All Permissions)  │
+                                                  └─────────────────────┘
 ```
 
 - **Claude Client:** Makes standard MCP protocol calls
