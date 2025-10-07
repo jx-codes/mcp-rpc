@@ -20,6 +20,8 @@ The Model Context Protocol (MCP) typically requires LLMs to make sequential, ind
 
 ### The Code Mode Solution
 
+https://blog.cloudflare.com/code-mode/
+
 Instead of calling MCP servers directly, Code Mode lets LLMs write regular TypeScript code in a secure sandbox. This enables:
 
 - **Parallel operations** - kick off multiple requests concurrently with `Promise.all()`
